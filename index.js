@@ -1,2 +1,2 @@
 console.log("Welcome to the game!");
-// console.log("Hello World");
+console.log("Hello World");
