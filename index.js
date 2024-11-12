@@ -22,7 +22,6 @@ const weapons = [
   { name: "claw hammer", power: 50 },
   { name: "sword", power: 100 },
 ];
-
 const locations = [
   {
     name: "town square",
@@ -113,3 +112,5 @@ function buyWeapon() {
 function fightSlime() {}
 
 function fightBeast() {}
+
+function sellWeapon() {}
