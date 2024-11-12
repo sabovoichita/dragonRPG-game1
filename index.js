@@ -22,6 +22,7 @@ const cat = {
   "Number of legs": 4,
 };
 console.log("cat's name: " + cat.name);
+console.log("cat's - Number of legs: " + cat["Number of legs"]);
 
 //initialize buttons
 button1.onclick = goStore;
