@@ -1,7 +1,7 @@
 let xp = 0;
 let health = 100;
 let gold = 50;
-let currentWeaponIndex = 0;
+let currentWeapon = 0;
 let fighting;
 let monsterHealth;
 let inventory = ["stick"];
@@ -23,9 +23,21 @@ const weapons = [
   { name: "sword", power: 100 },
 ];
 const monsters = [
-  { name: "slime", level: 2, health: 15 },
-  { name: "fanged beast", level: 8, health: 60 },
-  { name: "dragon", level: 20, health: 300 },
+  {
+    name: "slime",
+    level: 2,
+    health: 15,
+  },
+  {
+    name: "fanged beast",
+    level: 8,
+    health: 60,
+  },
+  {
+    name: "dragon",
+    level: 20,
+    health: 300,
+  },
 ];
 const locations = [
   {
@@ -72,7 +84,6 @@ const locations = [
     "button functions": [restart, restart, restart],
     text: "You die. &#x2620;",
   },
-  ,
   {
     name: "win",
     "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
@@ -87,7 +98,7 @@ const locations = [
   },
 ];
 
-//initialize buttons
+// initialize buttons
 button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
@@ -127,12 +138,12 @@ function buyHealth() {
 }
 
 function buyWeapon() {
-  if (currentWeaponIndex < weapons.length - 1) {
+  if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
       gold -= 30;
-      currentWeaponIndex++;
+      currentWeapon++;
       goldText.innerText = gold;
-      let newWeapon = weapons[currentWeaponIndex].name;
+      let newWeapon = weapons[currentWeapon].name;
       text.innerText = "You now have a " + newWeapon + ".";
       inventory.push(newWeapon);
       text.innerText += " In your inventory you have: " + inventory;
@@ -157,8 +168,9 @@ function sellWeapon() {
     text.innerText = "Don't sell your only weapon!";
   }
 }
+
 function fightSlime() {
-  fighting = 0 - monsters[slime];
+  fighting = 0;
   goFight();
 }
 
@@ -183,11 +195,11 @@ function goFight() {
 function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText +=
-    " You attack it with your " + weapons[currentWeaponIndex].name + ".";
+    " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
   if (isMonsterHit()) {
     monsterHealth -=
-      weapons[currentWeaponIndex].power + Math.floor(Math.random() * xp) + 1;
+      weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
   } else {
     text.innerText += " You miss.";
   }
@@ -203,9 +215,8 @@ function attack() {
     }
   }
   if (Math.random() <= 0.1 && inventory.length !== 1) {
-    //if weapon breaks
     text.innerText += " Your " + inventory.pop() + " breaks.";
-    currentWeaponIndex--;
+    currentWeapon--;
   }
 }
 
@@ -216,9 +227,7 @@ function getMonsterAttackValue(level) {
 }
 
 function isMonsterHit() {
-  if (true) {
-    return Math.random() > 0.2 || health < 20;
-  }
+  return Math.random() > 0.2 || health < 20;
 }
 
 function dodge() {
@@ -245,7 +254,7 @@ function restart() {
   xp = 0;
   health = 100;
   gold = 50;
-  currentWeaponIndex = 0;
+  currentWeapon = 0;
   inventory = ["stick"];
   goldText.innerText = gold;
   healthText.innerText = health;
@@ -255,6 +264,14 @@ function restart() {
 
 function easterEgg() {
   update(locations[7]);
+}
+
+function pickTwo() {
+  pick(2);
+}
+
+function pickEight() {
+  pick(8);
 }
 
 function pick(guess) {
@@ -278,11 +295,4 @@ function pick(guess) {
       lose();
     }
   }
-}
-
-function pickTwo() {
-  pick(2);
-}
-function pickEight() {
-  pick(8);
 }
