@@ -196,6 +196,9 @@ function attack() {
       defeatMonster();
     }
   }
+  if (Math.random() <= 0.1) {
+    //if weapon breaks
+  }
 }
 
 function getMonsterAttackValue(level) {
