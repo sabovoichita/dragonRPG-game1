@@ -128,3 +128,5 @@ function fightBeast() {}
 function fightDragon() {
   return console.log("Fighting dragon.");
 }
+
+function goFight() {}
