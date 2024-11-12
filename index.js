@@ -257,7 +257,9 @@ function easterEgg() {
   update(locations[7]);
 }
 
-function pick(guess) {}
+function pick(guess) {
+  const numbers = [];
+}
 
 function pickTwo() {
   pick(2);
